@@ -10,6 +10,22 @@ class Tab1Controller < UIViewController
   def viewDidLoad
     view.backgroundColor = UIColor.scrollViewTexturedBackgroundColor
     setupNavigationBar
+    add_form_elements
+  end
+
+  def add_form_elements
+    label = UILabel.alloc.init
+    if self.respondsToSelector(:edgesForExtendedLayout)
+      self.edgesForExtendedLayout = UIRectEdgeNone
+      label.frame = [[0,0], [300,30]]
+    else
+      label.frame = [[0,40], [300,30]]
+    end
+    label.backgroundColor = UIColor.clearColor
+    label.textColor = UIColor.greenColor
+    label.font = UIFont.fontWithName('HelveticaNeue-CondensedBold', size: 18)
+    label.text = 'This is sample application'
+    view.addSubview label
   end
 
   def setupNavigationBar
