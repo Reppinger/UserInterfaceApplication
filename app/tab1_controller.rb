@@ -18,8 +18,12 @@ class Tab1Controller < UIViewController
     view.addSubview label
     textfield = create_textfield
     view.addSubview textfield
-    switch = create_switch
-    view.addSubview switch
+    @switch = create_switch
+    view.addSubview @switch
+    @slider = create_slider
+    view.addSubview @slider
+    @normalButton = create_button
+    view.addSubview @normalButton
   end
 
   def create_label
@@ -46,9 +50,27 @@ class Tab1Controller < UIViewController
   end
 
   def create_switch
-    @switch = UISwitch.alloc.initWithFrame([[10, 130], [200, 35]])
-    @switch.addTarget(self, action: 'switch_is_changed', forControlEvents: UIControlEventValueChanged)
-    @switch
+    switch = UISwitch.alloc.initWithFrame([[10, 130], [200, 35]])
+    switch.addTarget(self, action: 'switch_is_changed', forControlEvents: UIControlEventValueChanged)
+    switch
+  end
+
+  def create_slider
+    slider = UISlider.alloc.initWithFrame([[10,160],[200,35]])
+    slider.minimumValue = 0
+    slider.maximumValue = 1000
+    slider.value = slider.maximumValue/2
+    slider.addTarget(self, action: 'slider_value_changed', forControlEvents: UIControlEventValueChanged)
+    slider
+  end
+
+  def create_button
+    button = UIButton.buttonWithType(UIButtonTypeSystem)
+    button.frame = [[10,200],[200,35]]
+    button.setTitle('Click Me', forState: UIControlStateNormal)
+    button.setTitle('You have clicked me', forState: UIControlStateHighlighted)
+    button.addTarget(self, action: 'button_is_pressed', forControlEvents: UIControlEventTouchDown)
+    button
   end
 
   def setupNavigationBar
@@ -68,6 +90,14 @@ class Tab1Controller < UIViewController
     else
 
     end
+  end
+
+  def slider_value_changed
+
+  end
+
+  def button_is_pressed
+
   end
 
 end
